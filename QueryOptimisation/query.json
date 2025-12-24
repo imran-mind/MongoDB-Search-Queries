@@ -1,0 +1,40 @@
+[
+  {
+    $search: {
+      index: "default",
+      compound: {
+        should: [
+           {
+            phrase: {
+              query: "racing",
+              path: "title"
+            }
+          },
+          {
+            text: {
+              query: "racing",
+              path: "title"
+            }
+          }
+        ],
+        filter: [
+          {
+            phrase: {
+              query: "USA",
+              path: "countries"
+            }
+          },
+          {
+            range: {
+              path: "year",
+              gt: 2012
+            }
+          }
+        ]
+      },
+      concurrent: true,
+      returnStoredSource: true
+    }
+  },
+  
+]

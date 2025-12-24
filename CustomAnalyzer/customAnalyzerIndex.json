@@ -1,0 +1,36 @@
+{
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "genres": {
+        "analyzer": "lucene.keyword",
+        "type": "string"
+      },
+      "title": {
+        "analyzer": "apostrophe_remover",
+        "type": "string"
+      }
+    }
+  },
+  "analyzers": [
+    {
+      "charFilters": [
+        {
+          "mappings": {
+            "'": ""
+          },
+          "type": "mapping"
+        }
+      ],
+      "name": "apostrophe_remover",
+      "tokenFilters": [
+        {
+          "type": "lowercase"
+        }
+      ],
+      "tokenizer": {
+        "type": "standard"
+      }
+    }
+  ]
+}

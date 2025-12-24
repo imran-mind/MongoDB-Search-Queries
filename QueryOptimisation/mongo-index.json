@@ -1,0 +1,13 @@
+{
+  "mappings": {
+    "dynamic": true
+  },
+  "storedSource": {
+    "include": [
+      "title",
+      "plot",
+      "fullplot",
+      "year"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "fields": [
+    {
+      "numDimensions": 512,
+      "path": "embedding",
+      "similarity": "cosine",
+      "type": "vector"
+    },
+    {
+      "path": "price",
+      "type": "filter"
+    },
+    {
+      "path": "rating",
+      "type": "filter"
+    },
+    {
+      "path": "category",
+      "type": "filter"
+    }
+  ]
+}

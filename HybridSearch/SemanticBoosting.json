@@ -1,0 +1,65 @@
+[
+  {
+    $search: {
+      index: "product_fulltext_index",
+      compound: {
+        should: [
+          {
+            text: {
+              query: "Leather Backpack",
+              path: "title"
+            }
+          },
+          {
+            equals: {
+              path: "_id",
+              value: ObjectId(
+                "692317cc48e798bb1173095e"
+              ),
+              score: {
+                boost: {
+                  value: 0.87 * 10
+                }
+              }
+            }
+          },
+          {
+            equals: {
+              path: "_id",
+              value: ObjectId(
+                "692317cc48e798bb11730962"
+              ),
+              score: {
+                boost: {
+                  value: 0.86 * 10
+                }
+              }
+            }
+          },
+          {
+            equals: {
+              path: "_id",
+              value: ObjectId(
+                "692317cc48e798bb11730961"
+              ),
+              score: {
+                boost: {
+                  value: 1 * 10
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    $project: {
+      title: 1,
+      plot: 1,
+      fullplot: 1,
+      year: 1,
+      score: { $meta: "searchScore" }
+    }
+  }
+]
