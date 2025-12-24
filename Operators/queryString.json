@@ -1,0 +1,32 @@
+{
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "title": {
+        "type": "string",
+        "analyzer": "apostrophe_remover"
+      }
+    }
+  },
+  "analyzers": [
+    {
+      "name": "apostrophe_remover",
+      "charFilters": [
+        {
+          "type": "mapping",
+          "mappings": [
+            "' => "
+          ]
+        }
+      ],
+      "tokenizer": {
+        "type": "standard"
+      },
+      "tokenFilters": [
+        {
+          "type": "lowercase"
+        }
+      ]
+    }
+  ]
+}

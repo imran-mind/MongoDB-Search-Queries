@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "6948de087f94976917be0496"
+  },
+  "mappingType": "equivalent",
+  "synonyms": [
+    "car",
+    "vehicle",
+    "automobile"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6948de087f94976917be0497"
+  },
+  "mappingType": "explicit",
+  "input": [
+    "race"
+  ],
+  "synonyms": [
+    "contest",
+    "rally"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6948de087f94976917be0498"
+  },
+  "mappingType": "equivalent",
+  "synonyms": [
+    "dress",
+    "apparel",
+    "attire"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6948de087f94976917be0499"
+  },
+  "mappingType": "explicit",
+  "input": [
+    "boat"
+  ],
+  "synonyms": [
+    "vessel",
+    "sail"
+  ]
+}]

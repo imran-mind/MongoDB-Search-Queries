@@ -1,0 +1,126 @@
+Index 
+{
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "genres": {
+        "type": "token"
+      },
+      "released": {
+        "type": "date"
+      },
+      "year": {
+        "type": "number"
+      }
+    }
+  }
+}
+
+String facet count
+
+[
+  {
+    $searchMeta: {
+      index: "index_on_fields",
+      facet: {
+        operator: {
+          range: {
+            path: "year",
+            gte: 2000,
+            lte: 2015
+          }
+        },
+        facets: {
+          genresFacet: {
+            type: "string",
+            path: "genres"
+          }
+        }
+      }
+    }
+  }
+]
+
+Number facet count
+[
+  {
+    $searchMeta: {
+      index: "index_on_fields",
+      facet: {
+        facets: {
+          yearFacet: {
+            type: "number",
+            path: "year",
+            boundaries: [1980, 1990, 2000],
+            default: "other"
+          }
+        }
+      }
+    }
+  }
+]
+
+Date facet count
+[
+  {
+    $searchMeta: {
+      index: "index_on_fields",
+      facet: {
+        facets: {
+          releaseFacet: {
+            type: "date",
+            path: "released",
+            boundaries: [
+              ISODate("2000-01-01"),
+              ISODate("2005-01-01"),
+              ISODate("2010-01-01"),
+              ISODate("2015-01-01"),
+              ISODate("2020-01-01"),
+            ],
+            default: "other"
+          }
+        }
+      }
+    }
+  }
+]
+
+$search facet count
+
+[
+  {
+    $search: {
+      index: "index_on_fields",
+      facet: {
+        operator: {
+          range: {
+            path: "year",
+            gte: 2000,
+            lte: 2015
+          }
+        },
+        facets: {
+          genresFacet: {
+            type: "string",
+            path: "genres",
+            numBuckets: 3
+          }
+        }
+      }
+    }
+  },
+  // 👇 This stage extracts facet metadata
+  {
+    $addFields: {
+      genresFacets: "$$SEARCH_META.facet"
+    }
+  },
+  {
+    $project: {
+      title: 1,
+      year: 1,
+      genresFacets: 1,
+      facets: 1
+    }
+  },
+]

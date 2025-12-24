@@ -1,0 +1,72 @@
+[
+  {
+    $search: {
+      index: "autocomplete",
+      autocomplete: {
+        query: "Dark Knight",//"new purchase",
+        path: "title",
+        tokenOrder: "any"
+      }
+    }
+  },
+  { $limit: 10 },
+  { $project: { _id: 0, title: 1 } }
+]
+
+
+================================================================
+[
+  {
+    $search: {
+      index: "autocomplete",
+      autocomplete: {
+        path: "title",
+        query: "café"
+      }
+    }
+  },
+  {
+    $project: {
+      title:1,
+      plot:1
+    }
+  }
+]
+================================================================
+[
+  {
+    $search: {
+      index: "autocomplete",
+      autocomplete: {
+        query: "gokden",
+        path: "title",
+        tokenOrder: "sequential",
+        fuzzy: {
+          maxEdits: 1,
+          prefixLength: 1,
+          maxExpansions: 5
+        }
+      }
+    }
+  },
+  { $limit: 10 },
+  { $project: { _id: 0, title: 1 } }
+]
+================================================================
+[
+  {
+    $search: {
+      index: "autocomplete",
+      autocomplete: {
+        path: "title",
+        query: "man without" //
+      }
+    }
+  },
+  {
+    $project: {
+      title:1
+    }
+  }
+]
+================================================================

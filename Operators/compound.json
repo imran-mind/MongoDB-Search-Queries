@@ -1,0 +1,56 @@
+[
+  {
+    $search: {
+      index: "default",
+      compound: {
+        must: [
+          {
+            text: {
+              path: "genres",
+              query: "comedy"
+            }
+          },
+          {
+            exists: {
+              path: "rated"
+            }
+          }
+        ],
+        mustNot: [
+          {
+            text: {
+              path: "rated",
+              query: "PG-13"
+            }
+          }
+        ],
+        should:[
+          {
+            near:{
+              path: "imdb.rating",
+              origin: 9,
+              pivot: 1
+            }
+          }
+        ],
+        filter:[
+          {
+            range:{
+              path: 'year',
+              gte: 1950
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    $project: {
+      title:1,
+      "imdb.rating":1,
+      rated:1,
+      genres:1,
+      year:1
+    }
+  }
+]
